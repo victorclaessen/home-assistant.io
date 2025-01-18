@@ -33,7 +33,7 @@ ha_dhcp: true
 ha_integration_type: integration
 ---
 
-Integrates [Sensibo](https://sensibo.com) devices into Home Assistant.
+The **Sensibo** {% term integration %} integrates [Sensibo](https://sensibo.com) devices into Home Assistant.
 
 ## Prerequisites
 
@@ -45,30 +45,61 @@ then in the Sensibo app log you will be able to distinguish between actions
 done in the app and actions done by Home Assistant.
 {% endtip %}
 
+## Supported device
+
+The **Sensibo** {% term integration %} supports the following devices and accessories.
+
+| Device                    | Type                      | Description                                                                       |
+| ------------------------- | ------------------------- | --------------------------------------------------------------------------------- |
+| Sensibo Sky               | Smart AC control          | Transform Your Air Conditioner into a Smart Device.                               |
+| Sensibo Air               | Smart AC control          | Transform Your Air Conditioner into a Smart Device.                               |
+| Sensibo Air Pro           | Smart AC control          | Transform Your Air Conditioner into a Smart Device with air quality monitoring.   |
+| Sensibo Pure              | Smart Air purifier        | Boost you indoor air quality.                                                     |
+| Sensibo Elements          | Smart Air Quality monitor | Monitor your home's indoor air quality.                                           |
+| Room sensor               | Motion sensor             | Motion sensor with temperature and humidity sensors.                              |
+
 {% include integrations/config_flow.md %}
+
+{% configuration_basic %}
+API key:
+  description: The previously created API key.
+{% endconfiguration_basic %}
+
+## Data fetching and limitations
+
+Data is polled from the **Sensibo** API once every minute for all devices.
+
+If polling cannot happen because of no connectivity or a malfunctioning API, it will retry a few times before failing.
+The user can use the [`homeassistant.update_entity`](homeassistant#action-homeassistantupdate_entity) action to manually try again later, in the case the user has solved the connectivity issue.
+
+## Troubleshooting
+
+This service is reliant on an internet connection and that the **Sensibo** API is available. Here are the things you can try before raising an issue:
+
+- Check that internet is available from your Home Assistant instance.
+- Check that the **Sensibo** API is available by clicking [here](https://home.sensibo.com/api/v1/users/me). If you have previously logged in to Sensibo web, you will get a JSON back with the provided information about your account. If not logged in, the API will respond with `login_required`.
+- Use `curl` in a terminal on your Home Assistant instance using the same URL as previously opened in the browser. `curl https://home.sensibo.com/api/v1/users/me`
+
+### Message `Device [name of device] not correctly registered with remote on Sensibo cloud.` appear in the log
+
+When setup a device the first time, a `remote` needs to be defined for the device in the **Sensibo** app either automatically or manually.
+The device will appear in Home Assistant, but won't be usable as no HVAC modes can be selected.
 
 ## Binary sensors
 
 For motion sensors (supported by Sensibo Air devices), this integration provides the following sensors:
 
-- Motion
-- Alive
-- Main sensor
-
-For climate devices, these sensors are available:
-
-- Room presence (for Air devices with an attached motion sensor)
-
-For Pure devices, these sensors are available:
-
-- Pure Boost Enabled
-- Pure Boost linked with AC
-- Pure Boost linked with Presence
-- Pure Boost linked with Outdoor Air Quality
-
-For all devices, these sensors are available:
-
-- Filter Clean Required
+| Sensor                                     | Supported by device | Description                                                                       |
+| ------------------------------------------ | ------------------- | --------------------------------------------------------------------------------- |
+| Motion                                     | Room sensor         | Is there motion.                                                                  |
+| Alive                                      | Room sensor         | Is the motion sensor alive.                                                       |
+| Main sensor                                | Room sensor         | Is the connected motion sensor the main sensor for the Air device.                |
+| Room presence                              | Room sensor (Air)   | Is there presence in the room of the air device.                                  |
+| Pure Boost Enabled                         | Pure                | Is Pure Boost enabled.                                                            |
+| Pure Boost linked with AC                  | Pure                | Is Pure Boost linked with an A/C device.                                          |
+| Pure Boost linked with Presence            | Pure                | Is Pure Boost linked to presence.                                                 |
+| Pure Boost linked with Outdoor Air Quality | Pure                | Is Pure Boost linked with outdoor air quality.                                    |
+| Filter Clean Required                      | Sky/Air/Air Pro     | Does the A/C's filter in need of cleaning.                                        |
 
 ## Button
 
@@ -249,3 +280,7 @@ switch:
 ```
 
 {% endraw %}
+
+## Remove the integration
+
+{% include integrations/remove_device_service.md %}
