@@ -54,7 +54,7 @@ The **Sensibo** {% term integration %} supports the following devices and access
 | Sensibo Sky               | Smart AC control          | Transform Your Air Conditioner into a Smart Device.                               |
 | Sensibo Air               | Smart AC control          | Transform Your Air Conditioner into a Smart Device.                               |
 | Sensibo Air Pro           | Smart AC control          | Transform Your Air Conditioner into a Smart Device with air quality monitoring.   |
-| Sensibo Pure              | Smart Air purifier        | Boost you indoor air quality.                                                     |
+| Sensibo Pure              | Smart Air purifier        | Boost your indoor air quality.                                                     |
 | Sensibo Elements          | Smart Air Quality monitor | Monitor your home's indoor air quality.                                           |
 | Room sensor               | Motion sensor             | Motion sensor with temperature and humidity sensors.                              |
 
@@ -84,7 +84,7 @@ This service is reliant on an internet connection and that the **Sensibo** API i
 
 **Log entry:** `Device [name of device] not correctly registered with remote on Sensibo cloud.`
 
-When setup a device the first time, a `remote` needs to be defined for the device in the **Sensibo** app either automatically or manually.
+When setting up a device the first time, a `remote` needs to be defined for the device in the **Sensibo** app either automatically or manually.
 The device will appear in Home Assistant, but won't be usable as no HVAC modes can be selected.
 
 ## Entities
@@ -138,7 +138,7 @@ Depending on device support, some entities might not be available as the device 
 
 | Entity                                     | Type                 | Description                                                                       |
 | ------------------------------------------ | -------------------- | --------------------------------------------------------------------------------- |
-| PM 2.5                                     | Sensor               | PM 2.5 reading from device.                                                       |
+| PM2.5                                      | Sensor               | PM2.5 reading from device.                                                        |
 | Ethanol                                    | Sensor               | Ethanol reading from device.                                                      |
 | Air quality                                | Sensor               | Air quality reading from device.                                                  |
 
@@ -150,7 +150,7 @@ Depending on device support, some entities might not be available as the device 
 | Pure Boost linked with presence            | Binary sensor        | Is Pure Boost linked to presence.                                                 |
 | Pure Boost linked with indoor air quality  | Binary sensor        | Is Pure Boost linked with indoor air quality.                                     |
 | Pure Boost linked with outdoor air quality | Binary sensor        | Is Pure Boost linked with outdoor air quality.                                    |
-| Pure AQI                                   | Sensor               | PM 2.5 level as 'Good', 'Moderate' and 'Bad' .                                    |
+| Pure AQI                                   | Sensor               | PM2.5 level indicated as 'Good', 'Moderate' and 'Bad' .                           |
 | Pure Boost Sensitivity                     | Sensor               | Sensitivity for Pure Boost.                                                       |
 | Pure Boost                                 | Switch               | Enable/Disable Pure Boost.                                                        |
 
@@ -322,19 +322,19 @@ Target:
   description: Select the Sensibo climate entity.
   mandatory: true
 Threshold high:
-  description: When trigger goes above.
+  description: When the trigger goes above this value.
   mandatory: true
 State high threshold:
-  description: Which full state to configure above the high threshold.
+  description: The full state to configure above the high threshold.
   mandatory: true
 Threshold low:
-  description: When trigger goes below.
+  description: When the trigger goes below this value.
   mandatory: true
 State low threshold:
-  description: Which full state to configure below the low threshold.
+  description: The full state to configure below the low threshold.
   mandatory: true
 Trigger type:
-  description: Trigger type is `temperature`, `feelsLike` or `humidity`.
+  description: The trigger type (`temperature`, `feelsLike`, or `humidity`).
   mandatory: true
 {% endconfiguration_basic %}
 
