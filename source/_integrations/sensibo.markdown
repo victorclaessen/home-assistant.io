@@ -85,96 +85,85 @@ This service is reliant on an internet connection and that the **Sensibo** API i
 When setup a device the first time, a `remote` needs to be defined for the device in the **Sensibo** app either automatically or manually.
 The device will appear in Home Assistant, but won't be usable as no HVAC modes can be selected.
 
-## Binary sensors
+## Entities
 
-For motion sensors (supported by Sensibo Air devices), this integration provides the following sensors:
+{% note %}
 
-| Sensor                                     | Supported by device | Description                                                                       |
-| ------------------------------------------ | ------------------- | --------------------------------------------------------------------------------- |
-| Motion                                     | Room sensor         | Is there motion.                                                                  |
-| Alive                                      | Room sensor         | Is the motion sensor alive.                                                       |
-| Main sensor                                | Room sensor         | Is the connected motion sensor the main sensor for the Air device.                |
-| Room presence                              | Room sensor (Air)   | Is there presence in the room of the air device.                                  |
-| Pure Boost Enabled                         | Pure                | Is Pure Boost enabled.                                                            |
-| Pure Boost linked with AC                  | Pure                | Is Pure Boost linked with an A/C device.                                          |
-| Pure Boost linked with Presence            | Pure                | Is Pure Boost linked to presence.                                                 |
-| Pure Boost linked with Outdoor Air Quality | Pure                | Is Pure Boost linked with outdoor air quality.                                    |
-| Filter Clean Required                      | Sky/Air/Air Pro     | Does the A/C's filter in need of cleaning.                                        |
+Some entities are disabled by default, so you need to [enable them](/common-tasks/general/#to-enable-or-disable-a-single-entity) to use them.
 
-## Button
+Depending on device support, some entities might not be available as the device does not support them.
 
-You can reset your filter check by using the button available on climate devices.
+{% endnote %}
 
-By pressing the button, you tell your device that you have cleaned or replaced the filter.
+### Entities provided by all devices
 
-## Number entities
+| Entity                                     | Type                 | Description                                                                       |
+| ------------------------------------------ | -------------------- | --------------------------------------------------------------------------------- |
+| Temperature calibration                    | Number               | Calibrate the temperature reading of the device.                                  |
+| Humidity calibration                       | Number               | Calibrate the humidity reading of the device.                                     |
+| Firmware                                   | Update               | Firmware update available.                                                        |
 
-By using the number entities you can calibrate the temperature and hunmidity of your device.
+### Entities provided by Sky/Air/Air Pro and Pure
 
-These entities are disabled by default.
+| Entity                                     | Type                 | Description                                                                       |
+| ------------------------------------------ | -------------------- | --------------------------------------------------------------------------------- |
+| [Name of device]                           | Climate              | The main climate entity for the device to control HVAC mode.                      |
+| Reset filter                               | Button               | Reset the filter timer after cleaning.                                            |
+| Light                                      | Select               | Turn the light on/off/dim for the device.                                         |
+| Filter clean required                      | Sensor               | Does the A/C's filter in need of cleaning.                                        |
+| Filter last reset                          | Sensor               | Last reset of the filter cleaning.                                                |
 
-## Select entities
+### Entities provided by Sky/Air/Air Pro
 
-For supported devices, this integration provides support to set the following modes by the select entity:
+| Entity                                     | Type                 | Description                                                                       |
+| ------------------------------------------ | -------------------- | --------------------------------------------------------------------------------- |
+| Feels Like                                 | Sensor               | Feels like temperature.                                                           |
+| Timer end time                             | Sensor               | End time of timer.                                                                |
+| Climate React type                         | Sensor               | Climate React type: Temperature, Feels like or Humidity.                          |
+| Climate React low temperature threshold    | Sensor               | Low temperature threshold setting for Climate react.                              |
+| Climate React high temperature threshold   | Sensor               | High temperature threshold setting for Climate react.                             |
+| Timer                                      | Switch               | Timer on/off. Enabling the timer, sets it to 10 minutes.                          |
+| Climate React                              | Switch               | Enable/Disable Climate React.                                                     |
 
-- Light
+### Entities provided by Air/Air Pro and Elements
 
-## Sensor entities
+| Entity                                     | Type                 | Description                                                                       |
+| ------------------------------------------ | -------------------- | --------------------------------------------------------------------------------- |
+| TVOC                                       | Sensor               | TVOC reading from device.                                                         |
+| Co2                                        | Sensor               | Co2 reading from device.                                                          |
 
-For all devices, these sensors are available:
+### Entities provided by Elements
 
-- Filter last reset
-- Feels Like
-- Timer end time
+| Entity                                     | Type                 | Description                                                                       |
+| ------------------------------------------ | -------------------- | --------------------------------------------------------------------------------- |
+| PM 2.5                                     | Sensor               | PM 2.5 reading from device.                                                       |
+| Ethanol                                    | Sensor               | Ethanol reading from device.                                                      |
+| Air quality                                | Sensor               | Air quality reading from device.                                                  |
 
-For motion sensors (supported by Sensibo Air devices), this integration provides the following sensors:
+### Entities provided by Pure
 
-- Temperature
-- Humidity
+| Entity                                     | Type                 | Description                                                                       |
+| ------------------------------------------ | -------------------- | --------------------------------------------------------------------------------- |
+| Pure Boost linked with AC                  | Binary sensor        | Is Pure Boost linked with an A/C device.                                          |
+| Pure Boost linked with presence            | Binary sensor        | Is Pure Boost linked to presence.                                                 |
+| Pure Boost linked with indoor air quality  | Binary sensor        | Is Pure Boost linked with indoor air quality.                                     |
+| Pure Boost linked with outdoor air quality | Binary sensor        | Is Pure Boost linked with outdoor air quality.                                    |
+| Pure AQI                                   | Sensor               | PM 2.5 level as 'Good', 'Moderate' and 'Bad' .                                    |
+| Pure Boost Sensitivity                     | Sensor               | Sensitivity for Pure Boost.                                                       |
+| Pure Boost                                 | Switch               | Enable/Disable Pure Boost.                                                        |
 
-For diagnostics, not automatically displayed on dashboards, these sensors are available for motion sensors:
+### Entities provided by Room sensor
 
-- Voltage
-- Rssi
-
-For Pure devices, these sensors are available:
-
-- PM2.5
-- Pure Boost Sensitivity
-
-For AirQ device, these sensors are available:
-
-- TVOC
-- CO2
-
-For Element device, these sensors are available:
-
-- PM 2.5
-- TVOC
-- CO2
-- Ethanol
-- Air quality
-
-For climate devices, these sensors are available:
-
-- Climate React low temperature threshold
-- Climate React high temperature threshold
-
-## Switch entities
-
-For climate devices, these switches are available:
-
-Support to enable/disable a timer to delay a start or stop (depending on the current state) of your device.
-
-The switch uses a timer of 60 minutes delay. You can choose a custom delay using the custom `sensibo.enable_timer` action. See [Timer](#timer).
-
-Support to enable/disable Climate React
-
-Usage of the Climate React switch requires that the action has been configured previously in the app or by using the custom `sensibo.enable_climate_react` action. See [Climate React](#climate-react)
-
-For Pure devices, this integration provides support to enable/disable Pure Boost.
-
-To customize the settings of Pure Boost, you can use the custom `sensibo.enable_pure_boost` action. See [Pure Boost](#pure-boost)
+| Entity                                     | Type                 | Description                                                                       |
+| ------------------------------------------ | -------------------- | --------------------------------------------------------------------------------- |
+| Motion                                     | Binary sensor        | Is there motion.                                                                  |
+| Connectivity                               | Binary sensor        | Is the motion sensor alive.                                                       |
+| Main sensor                                | Binary sensor        | Is the connected motion sensor the main sensor for the Air device.                |
+| Room occupied                              | Binary sensor        | Is there presence in the room of the Air device.                                  |
+| Temperature                                | Sensor               | Temperature reading.                                                              |
+| Humidity                                   | Sensor               | Humidity reading.                                                                 |
+| Battery voltage                            | Sensor               | Voltage from battery.                                                             |
+| RSSI                                       | Sensor               | RSSI reading from connectivity.                                                   |
 
 ## Custom actions
 
@@ -182,20 +171,64 @@ To customize the settings of Pure Boost, you can use the custom `sensibo.enable_
 
 As the below custom actions [Full state](#full-state) and [Climate react](#climate-react) both require their inputs to be exactly what the API requires, this custom action will provide the capabilities for the device for a certain HVAC mode to help the users on using those actions properly.
 
+**Action configuration:**
+
+{% configuration_basic %}
+Target:
+  description: Select the Sensibo climate entity.
+  mandatory: true
+HVAC mode:
+  description: Select the HVAC mode for which you want to get the capabilities.
+  mandatory: true
+{% endconfiguration_basic %}
+
+**Proposed action use:**
+
 1. Go to [Developer Tools](https://my.home-assistant.io/redirect/server_controls/).
 2. Switch to the **Actions** page.
 3. Use the `sensibo.get_device_capabilities` action.
 4. Select the `climate` entity as the target.
 5. Select the `hvac_mode` from the available list.
-6. Select **Perform action** to retrieve the available options per capability for that particular `climate` entity.
+6. Select **Perform action** to retrieve the available options.
+7. Copy the case-sensitive options as needed to other action calls, automations or scripts.
 
-From the provided dictionary, copy the case-sensitive options as needed into other action calls used in automations or scripts.
+### Set full state
 
-### Full state
+You can send a full state command to **Sensibo** instead of single commands using the `sensibo.full_state` action.
 
-You can send a full state command to Sensibo instead of single commands using the `sensibo.full_state` action.
+{% note %}
 
 All fields are required to be according to Sensibo API specifications and are case-sensitive.
+
+Only provide the fields which are supported by the device.
+
+{% endnote %}
+
+**Action configuration:**
+
+{% configuration_basic %}
+Target:
+  description: Select the Sensibo climate entity.
+  mandatory: true
+HVAC mode:
+  description: Select the HVAC mode for which you want to get the capabilities.
+  mandatory: true
+Target temperature:
+  description: Provide a target temperature if applicable.
+  mandatory: false
+Fan mode:
+  description: Provide a fan mode if applicable.
+  mandatory: false
+Swing mode:
+  description: Provide a swing mode if applicable.
+  mandatory: false
+Horizontal swing mode:
+  description: Provide a horizontal swing mode if applicable.
+  mandatory: false
+Light:
+  description: Provide a setting for the light if applicable.
+  mandatory: false
+{% endconfiguration_basic %}
 
 {% tip %}
 
@@ -205,29 +238,103 @@ Use the [Get device mode capabilities](#get-device-mode-capabilities) action to 
 
 ### Assume state
 
-For devices which are also controlled in other ways or often goes out of sync with Sensibo there is a `sensibo.assume_state` action.
+An HVAC device often has a manual remote or other means of control which can put **Sensibo** out of sync with the HVAC device.
 
-With this action you can tell Sensibo if your device is currently running or not without sending a new command to you device.
+Use the `sensibo.assume_state` action to tell **Sensibo** if the HVAC device is currently on or off without sending a control to the actual device.
 
-### Pure Boost
+**Action configuration:**
+
+{% configuration_basic %}
+Target:
+  description: Select the Sensibo climate entity.
+  mandatory: true
+State:
+  description: Select if the HVAC device is on or off.
+  mandatory: true
+{% endconfiguration_basic %}
+
+### Enable Pure Boost
 
 You can configure your Pure Boost settings using the `sensibo.enable_pure_boost` action.
 
-- Enable Pure Boost will enable the action with configured settings
+{% note %}
 
-Using Geo integration for Pure Boost is only possible by pre-configuration of Presence within the app.
+AC integration and Geo integration needs to be pre-configured via the app before first use.
 
-### Timer
+{% endnote %}
 
-You can enable a timer with a custom delay using the `sensibo.enable_timer` action that is provided.
+**Action configuration:**
 
-### Climate React
+{% configuration_basic %}
+Target:
+  description: Select the Sensibo climate entity.
+  mandatory: true
+AC integration:
+  description: Integrate with a HVAC device.
+  mandatory: true
+Geo integration:
+  description: Integrate with presence.
+  mandatory: true
+Indoor air quality:
+  description: Integrate with indoor air quality.
+  mandatory: true
+Outdoor air quality:
+  description: Integrate with outdoor air quality.
+  mandatory: true
+Sensitivity:
+  description: Set the sensitivity to `Normal` or `Sensitive`.
+  mandatory: true
+{% endconfiguration_basic %}
+
+### Enable timer
+
+You can enable a timer to turn the HVAC device on or off for a certain time, using the `sensibo.enable_timer` action that is provided.
+
+**Action configuration:**
+
+{% configuration_basic %}
+Target:
+  description: Select the Sensibo climate entity.
+  mandatory: true
+Minutes:
+  description: Number of minutes to turn the device on or off.
+  mandatory: true
+{% endconfiguration_basic %}
+
+### Enable Climate React
 
 You can configure your Climate React settings using the `sensibo.enable_climate_react` action.
 
-- Configuring this action also turns Climate React on
+{% note %}
+
+Configuring this action also turns Climate React on.
 
 When using the action, the state needs to be set to precisely what Sensibo API expects. The first time it's recommended to use the app to configure it.
+
+{% endnote %}
+
+**Action configuration:**
+
+{% configuration_basic %}
+Target:
+  description: Select the Sensibo climate entity.
+  mandatory: true
+Threshold high:
+  description: When trigger goes above.
+  mandatory: true
+State high threshold:
+  description: Which full state to configure above the high threshold.
+  mandatory: true
+Threshold low:
+  description: When trigger goes below.
+  mandatory: true
+State low threshold:
+  description: Which full state to configure below the low threshold.
+  mandatory: true
+Trigger type:
+  description: Trigger type is `temperature`, `feelsLike` or `humidity`.
+  mandatory: true
+{% endconfiguration_basic %}
 
 {% tip %}
 
@@ -235,7 +342,7 @@ Use the [Get device mode capabilities](#get-device-mode-capabilities) action to 
 
 {% endtip %}
 
-Example for low threshold state:
+**Example full state:**
 
 {% raw %}
 
@@ -252,9 +359,11 @@ light: "on"
 
 {% endraw %}
 
-## Adding a quick switch example
+## Examples
 
-If you want a "Quick Switch" to turn your AC On / Off, you can do that using the following `Switch Template`:
+### Template switch to turn HVAC device on or off
+
+A simple switch which has `heat` or `off` as mode.
 
 {% raw %}
 
@@ -264,19 +373,75 @@ switch:
     switches:
       ac:
         friendly_name: "AC"
-        value_template: "{{ is_state('climate.ac', 'cool') or is_state('climate.ac', 'heat') or is_state('climate.ac', 'dry') or is_state('climate.ac', 'fan_only') }}"
+        value_template: "{{ is_state('climate.ac', 'heat') }}"
         turn_on:
           action: climate.set_hvac_mode
           target:
             entity_id: climate.ac
           data:
-            hvac_mode: "cool"
+            hvac_mode: "heat"
         turn_off:
           action: climate.set_hvac_mode
           target:
             entity_id: climate.ac
           data:
             hvac_mode: "off"
+```
+
+{% endraw %}
+
+### Start the timer for 30 minutes when I get home
+
+{% raw %}
+
+```yaml
+id: '123'
+alias: Example timer
+description: ""
+triggers:
+  - trigger: zone
+    entity_id: person.me
+    zone: zone.home
+    event: enter
+conditions: []
+actions:
+  - action: sensibo.enable_timer
+    metadata: {}
+    data:
+      minutes: 30
+    target:
+      entity_id: climate.hvac_device
+mode: single
+```
+
+{% endraw %}
+
+### Set a full state of the HVAC device at 6pm
+
+{% raw %}
+
+```yaml
+id: '123'
+alias: Example full state
+description: ""
+triggers:
+  - trigger: time
+    at: "18:00:00"
+conditions: []
+actions:
+  - action: sensibo.full_state
+    metadata: {}
+    data:
+      mode: heat
+      target_temperature: 23
+      fan_mode: medium
+      swing_mode: fixedMiddleTop
+      horizontal_swing_mode: fixedCenter
+      light: "off"
+    target:
+      entity_id: climate.hvac_device
+mode: single
+
 ```
 
 {% endraw %}
