@@ -80,7 +80,9 @@ This service is reliant on an internet connection and that the **Sensibo** API i
 - Check that the **Sensibo** API is available by clicking [here](https://home.sensibo.com/api/v1/users/me). If you have previously logged in to Sensibo web, you will get a JSON back with the provided information about your account. If not logged in, the API will respond with `login_required`.
 - Use `curl` in a terminal on your Home Assistant instance using the same URL as previously opened in the browser. `curl https://home.sensibo.com/api/v1/users/me`
 
-### Message `Device [name of device] not correctly registered with remote on Sensibo cloud.` appear in the log
+### Specific log entries
+
+**Log entry:** `Device [name of device] not correctly registered with remote on Sensibo cloud.`
 
 When setup a device the first time, a `remote` needs to be defined for the device in the **Sensibo** app either automatically or manually.
 The device will appear in Home Assistant, but won't be usable as no HVAC modes can be selected.
