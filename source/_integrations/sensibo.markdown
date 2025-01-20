@@ -189,7 +189,7 @@ Depending on device support, some entities might not be available as the device 
 
 ### Get device mode capabilities
 
-As the below custom actions [Full state](#full-state) and [Climate react](#climate-react) both require their inputs to be exactly what the API requires, this custom action will provide the capabilities for the device for a certain HVAC mode to help the users on using those actions properly.
+As the below custom actions [Full state](#set-full-state) and [Climate react](#enable-climate-react) both require their inputs to be exactly what the API requires, this custom action will provide the capabilities for the device for a certain HVAC mode to help the users on using those actions properly.
 
 **Action configuration:**
 
