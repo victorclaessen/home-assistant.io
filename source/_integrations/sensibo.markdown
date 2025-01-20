@@ -49,14 +49,12 @@ done in the app and actions done by Home Assistant.
 
 The **Sensibo** {% term integration %} supports the following devices and accessories.
 
-| Device                    | Type                      | Description                                                                       |
-| ------------------------- | ------------------------- | --------------------------------------------------------------------------------- |
-| Sensibo Sky               | Smart AC control          | Transform Your Air Conditioner into a Smart Device.                               |
-| Sensibo Air               | Smart AC control          | Transform Your Air Conditioner into a Smart Device.                               |
-| Sensibo Air Pro           | Smart AC control          | Transform Your Air Conditioner into a Smart Device with air quality monitoring.   |
-| Sensibo Pure              | Smart Air purifier        | Boost your indoor air quality.                                                     |
-| Sensibo Elements          | Smart Air Quality monitor | Monitor your home's indoor air quality.                                           |
-| Room sensor               | Motion sensor             | Motion sensor with temperature and humidity sensors.                              |
+- **Sensibo Sky**: Smart AC control device.
+- **Sensibo Air**: Smart AC control device.
+- **Sensibo Air Pro**: Smart AC control device with air quality monitoring.
+- **Sensibo Pure**: Smart air purifier.
+- **Sensibo Elements**: Smart air quality monitoring.
+- **Sensibo Room Sensor**: Motion sensor and temperature readings (needs to be connected with an Air device).
 
 {% include integrations/config_flow.md %}
 
@@ -87,7 +85,7 @@ This service is reliant on an internet connection and that the **Sensibo** API i
 When setting up a device the first time, a `remote` needs to be defined for the device in the **Sensibo** app either automatically or manually.
 The device will appear in Home Assistant, but won't be usable as no HVAC modes can be selected.
 
-## Entities
+## Supported functionality
 
 {% note %}
 
@@ -97,75 +95,95 @@ Depending on device support, some entities might not be available as the device 
 
 {% endnote %}
 
-### Entities provided by all devices
+### Sensibo Sky, Air, Air Pro, Pure, Elements and Room sensor
 
-| Entity                                     | Type                 | Description                                                                       |
-| ------------------------------------------ | -------------------- | --------------------------------------------------------------------------------- |
-| Temperature calibration                    | Number               | Calibrate the temperature reading of the device.                                  |
-| Humidity calibration                       | Number               | Calibrate the humidity reading of the device.                                     |
-| Firmware                                   | Update               | Firmware update available.                                                        |
+#### Numbers
 
-### Entities provided by Sky/Air/Air Pro and Pure
+- **Temperature calibration**: Calibrate the temperature reading of the device.
+- **Humidity calibration**: Calibrate the humidity reading of the device.
 
-| Entity                                     | Type                 | Description                                                                       |
-| ------------------------------------------ | -------------------- | --------------------------------------------------------------------------------- |
-| [Name of device]                           | Climate              | The main climate entity for the device to control HVAC mode.                      |
-| Reset filter                               | Button               | Reset the filter timer after cleaning.                                            |
-| Light                                      | Select               | Turn the light on/off/dim for the device.                                         |
-| Filter clean required                      | Sensor               | Does the A/C's filter in need of cleaning.                                        |
-| Filter last reset                          | Sensor               | Last reset of the filter cleaning.                                                |
+#### Updates
 
-### Entities provided by Sky/Air/Air Pro
+- **Firmware**: Firmware update available.
 
-| Entity                                     | Type                 | Description                                                                       |
-| ------------------------------------------ | -------------------- | --------------------------------------------------------------------------------- |
-| Feels Like                                 | Sensor               | Feels like temperature.                                                           |
-| Timer end time                             | Sensor               | End time of timer.                                                                |
-| Climate React type                         | Sensor               | Climate React type: Temperature, Feels like or Humidity.                          |
-| Climate React low temperature threshold    | Sensor               | Low temperature threshold setting for Climate react.                              |
-| Climate React high temperature threshold   | Sensor               | High temperature threshold setting for Climate react.                             |
-| Timer                                      | Switch               | Timer on/off. Enabling the timer, sets it to 10 minutes.                          |
-| Climate React                              | Switch               | Enable/Disable Climate React.                                                     |
+### Sensibo Sky, Air, Air Pro, Pure and Elements
 
-### Entities provided by Air/Air Pro and Elements
+#### Binary sensors
 
-| Entity                                     | Type                 | Description                                                                       |
-| ------------------------------------------ | -------------------- | --------------------------------------------------------------------------------- |
-| TVOC                                       | Sensor               | TVOC reading from device.                                                         |
-| Co2                                        | Sensor               | Co2 reading from device.                                                          |
+- **Filter clean required**: Does the A/C's filter in need of cleaning.
 
-### Entities provided by Elements
+#### Buttons
 
-| Entity                                     | Type                 | Description                                                                       |
-| ------------------------------------------ | -------------------- | --------------------------------------------------------------------------------- |
-| PM2.5                                      | Sensor               | PM2.5 reading from device.                                                        |
-| Ethanol                                    | Sensor               | Ethanol reading from device.                                                      |
-| Air quality                                | Sensor               | Air quality reading from device.                                                  |
+- **Reset filter**: Reset the filter timer after cleaning.
 
-### Entities provided by Pure
+#### Climates
 
-| Entity                                     | Type                 | Description                                                                       |
-| ------------------------------------------ | -------------------- | --------------------------------------------------------------------------------- |
-| Pure Boost linked with AC                  | Binary sensor        | Is Pure Boost linked with an A/C device.                                          |
-| Pure Boost linked with presence            | Binary sensor        | Is Pure Boost linked to presence.                                                 |
-| Pure Boost linked with indoor air quality  | Binary sensor        | Is Pure Boost linked with indoor air quality.                                     |
-| Pure Boost linked with outdoor air quality | Binary sensor        | Is Pure Boost linked with outdoor air quality.                                    |
-| Pure AQI                                   | Sensor               | PM2.5 level indicated as 'Good', 'Moderate' and 'Bad' .                           |
-| Pure Boost Sensitivity                     | Sensor               | Sensitivity for Pure Boost.                                                       |
-| Pure Boost                                 | Switch               | Enable/Disable Pure Boost.                                                        |
+- **[Name of device]**: The main climate entity for the device to control HVAC mode.
 
-### Entities provided by Room sensor
+#### Selects
 
-| Entity                                     | Type                 | Description                                                                       |
-| ------------------------------------------ | -------------------- | --------------------------------------------------------------------------------- |
-| Motion                                     | Binary sensor        | Is there motion.                                                                  |
-| Connectivity                               | Binary sensor        | Is the motion sensor alive.                                                       |
-| Main sensor                                | Binary sensor        | Is the connected motion sensor the main sensor for the Air device.                |
-| Room occupied                              | Binary sensor        | Is there presence in the room of the Air device.                                  |
-| Temperature                                | Sensor               | Temperature reading.                                                              |
-| Humidity                                   | Sensor               | Humidity reading.                                                                 |
-| Battery voltage                            | Sensor               | Voltage from battery.                                                             |
-| RSSI                                       | Sensor               | RSSI reading from connectivity.                                                   |
+- **Light**: Turn the light on/off or dim for the device.
+
+#### Sensors
+
+- **Filter last reset**: Last reset of the filter cleaning.
+
+### Sensibo Sky, Air and Air Pro
+
+#### Sensors
+
+- **Feels like**: Feels like temperature.
+- **Timer end time**: End time of timer.
+- **Climate React type**: Climate React type: Temperature, Feels like or Humidity.
+- **Climate React low temperature threshold**: Low temperature threshold setting for Climate react.
+- **Climate React high temperature threshold**: High temperature threshold setting for Climate react.
+
+#### Switches
+
+- **Timer**: Timer on/off. Enabling the timer, sets it to 10 minutes.
+- **Climate React**: Enable/Disable Climate React.
+
+### Sensibo Air, Air Pro and Elements
+
+#### Sensors
+
+- **TVOC**: TVOC reading from device.
+- **Co2**: Co2 reading from device.
+
+### Sensibo Elements
+
+#### Sensors
+
+- **PM2.5**: PM2.5 reading from device.
+- **Ethanol**: Ethanol reading from device.
+- **Air quality**: Air quality based on readings from device.
+
+### Sensibo Pure
+
+#### Binary sensors
+
+- **Pure Boost linked with AC**: Is Pure Boost linked with an A/C device.
+- **Pure Boost linked with presence**: Is Pure Boost linked to presence.
+- **Pure Boost linked with indoor air quality**: Is Pure Boost linked with indoor air quality.
+- **Pure Boost linked with outdoor air quality**: Is Pure Boost linked with outdoor air quality.
+
+#### Sensors
+
+- **Pure AQI**: PM2.5 level indicated as 'Good', 'Moderate' and 'Bad'.
+- **Pure Boost Sensitivity**: Sensitivity for Pure Boost.
+
+#### Switches
+
+- **Pure Boost**: Enable/Disable Pure Boost.
+
+### Sensibo Room sensor
+
+#### Binary sensors
+
+- **Motion**: Is there motion
+- **Connectivity**: Is the motion sensor alive and connected
+- **Main sensor**: Is the connected motion sensor the main sensor for the connected Air device.
+- **Room occupied**: Is there presence in the room of the connected Air device.
 
 ## Custom actions
 
