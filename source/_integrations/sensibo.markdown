@@ -397,23 +397,21 @@ switch:
 {% raw %}
 
 ```yaml
-id: '123'
-alias: Example timer
-description: ""
-triggers:
-  - trigger: zone
-    entity_id: person.me
-    zone: zone.home
-    event: enter
-conditions: []
-actions:
-  - action: sensibo.enable_timer
-    metadata: {}
-    data:
-      minutes: 30
-    target:
-      entity_id: climate.hvac_device
-mode: single
+automation:
+  id: "123"
+  alias: "Example timer"
+  triggers:
+    - trigger: zone
+      entity_id: person.me
+      zone: zone.home
+      event: enter
+  actions:
+    - action: sensibo.enable_timer
+      data:
+        minutes: 30
+      target:
+        entity_id: climate.hvac_device
+  mode: single
 ```
 
 {% endraw %}
@@ -423,27 +421,24 @@ mode: single
 {% raw %}
 
 ```yaml
-id: '123'
-alias: Example full state
-description: ""
-triggers:
-  - trigger: time
-    at: "18:00:00"
-conditions: []
-actions:
-  - action: sensibo.full_state
-    metadata: {}
-    data:
-      mode: heat
-      target_temperature: 23
-      fan_mode: medium
-      swing_mode: fixedMiddleTop
-      horizontal_swing_mode: fixedCenter
-      light: "off"
-    target:
-      entity_id: climate.hvac_device
-mode: single
-
+automation:
+  id: "123"
+  alias: "Example full state"
+  triggers:
+    - trigger: time
+      at: "18:00:00"
+  actions:
+    - action: sensibo.full_state
+      data:
+        mode: heat
+        target_temperature: 23
+        fan_mode: "medium"
+        swing_mode: "fixedMiddleTop"
+        horizontal_swing_mode: "fixedCenter"
+        light: "off"
+      target:
+        entity_id: climate.hvac_device
+  mode: single
 ```
 
 {% endraw %}
