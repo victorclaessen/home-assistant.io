@@ -448,7 +448,7 @@ automation:
   actions:
     - action: sensibo.full_state
       data:
-        mode: heat
+        mode: "heat"
         target_temperature: 23
         fan_mode: "medium"
         swing_mode: "fixedMiddleTop"
