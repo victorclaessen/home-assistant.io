@@ -74,7 +74,7 @@ The user can use the [`homeassistant.update_entity`](homeassistant#action-homeas
 
 This service is reliant on an internet connection and that the **Sensibo** API is available. Here are the things you can try before raising an issue:
 
-- Check that internet is available from your Home Assistant instance.
+- Check that internet is available in your Home Assistant instance.
 - Check that the **Sensibo** API is available by clicking [here](https://home.sensibo.com/api/v1/users/me). If you have previously logged in to Sensibo web, you will get a JSON back with the provided information about your account. If not logged in, the API will respond with `login_required`.
 - Use `curl` in a terminal on your Home Assistant instance using the same URL as previously opened in the browser. `curl https://home.sensibo.com/api/v1/users/me`
 
@@ -82,7 +82,7 @@ This service is reliant on an internet connection and that the **Sensibo** API i
 
 **Log entry:** `Device [name of device] not correctly registered with remote on Sensibo cloud.`
 
-When setting up a device the first time, a `remote` needs to be defined for the device in the **Sensibo** app either automatically or manually.
+When setting up a device the first time, a `remote` needs to be defined for the device in the **Sensibo** app, either automatically or manually.
 The device will appear in Home Assistant, but won't be usable as no HVAC modes can be selected.
 
 ## Supported functionality
@@ -189,7 +189,7 @@ Depending on device support, some entities might not be available as the device 
 
 ### Get device mode capabilities
 
-As the below custom actions [Full state](#set-full-state) and [Climate react](#enable-climate-react) both require their inputs to be exactly what the API requires, this custom action will provide the capabilities for the device for a certain HVAC mode to help the users on using those actions properly.
+As the below custom actions [Full state](#set-full-state) and [Climate react](#enable-climate-react) both require their inputs to match the API requirements precisely, this custom action will provide the capabilities for the device for a certain HVAC mode to help the users on using those actions properly.
 
 **Action configuration:**
 
@@ -329,7 +329,7 @@ You can configure your Climate React settings using the `sensibo.enable_climate_
 
 Configuring this action also turns Climate React on.
 
-When using the action, the state needs to be set to precisely what Sensibo API expects. The first time it's recommended to use the app to configure it.
+When using the action, the state needs to be set to precisely what Sensibo API expects. The first time, it's recommended to use the app to configure it.
 
 {% endnote %}
 
