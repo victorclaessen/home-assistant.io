@@ -45,7 +45,7 @@ then in the Sensibo app log you will be able to distinguish between actions
 done in the app and actions done by Home Assistant.
 {% endtip %}
 
-## Supported device
+## Supported devices
 
 The **Sensibo** {% term integration %} supports the following devices and accessories.
 
@@ -65,9 +65,9 @@ API key:
 
 ## Data fetching and limitations
 
-Data is polled from the **Sensibo** API once every minute for all devices.
+Data is {% term polling polled %} from the **Sensibo** API once every minute for all devices.
 
-If polling cannot happen because of no connectivity or a malfunctioning API, it will retry a few times before failing.
+If {% term polling %}  cannot happen because of no connectivity or a malfunctioning API, it will retry a few times before failing.
 The user can use the [`homeassistant.update_entity`](homeassistant#action-homeassistantupdate_entity) action to manually try again later, in the case the user has solved the connectivity issue.
 
 ## Troubleshooting
@@ -106,11 +106,11 @@ Depending on device support, some entities might not be available as the device 
 
 - **Firmware**: Firmware update available.
 
-### Sensibo Sky, Air, Air Pro, Pure and Elements
+### Sensibo Sky, Air, Air Pro, Pure, and Elements
 
 #### Binary sensors
 
-- **Filter clean required**: Does the A/C's filter in need of cleaning.
+- **Filter clean required**: Does the A/C's filter need cleaning.
 
 #### Buttons
 
@@ -118,7 +118,7 @@ Depending on device support, some entities might not be available as the device 
 
 #### Climates
 
-- **[Name of device]**: The main climate entity for the device to control HVAC mode.
+- **[Name of device]**: The main climate entity for the device to control <abbr title="Heating, ventilation, and air conditioning">HVAC</abbr> mode.
 
 #### Selects
 
@@ -128,13 +128,13 @@ Depending on device support, some entities might not be available as the device 
 
 - **Filter last reset**: Last reset of the filter cleaning.
 
-### Sensibo Sky, Air and Air Pro
+### Sensibo Sky, Air, and Air Pro
 
 #### Sensors
 
 - **Feels like**: Feels like temperature.
 - **Timer end time**: End time of timer.
-- **Climate React type**: Climate React type: Temperature, Feels like or Humidity.
+- **Climate React type**: Climate React type: Temperature, Feels like, or Humidity.
 - **Climate React low temperature threshold**: Low temperature threshold setting for Climate react.
 - **Climate React high temperature threshold**: High temperature threshold setting for Climate react.
 
@@ -143,7 +143,7 @@ Depending on device support, some entities might not be available as the device 
 - **Timer**: Timer on/off. Enabling the timer, sets it to 10 minutes.
 - **Climate React**: Enable/Disable Climate React.
 
-### Sensibo Air, Air Pro and Elements
+### Sensibo Air, Air Pro, and Elements
 
 #### Sensors
 
@@ -169,7 +169,7 @@ Depending on device support, some entities might not be available as the device 
 
 #### Sensors
 
-- **Pure AQI**: PM2.5 level indicated as 'Good', 'Moderate' and 'Bad'.
+- **Pure AQI**: PM2.5 level indicated as 'Good', 'Moderate', and 'Bad'.
 - **Pure Boost Sensitivity**: Sensitivity for Pure Boost.
 
 #### Switches
@@ -196,10 +196,8 @@ As the below custom actions [Full state](#set-full-state) and [Climate react](#e
 {% configuration_basic %}
 Target:
   description: Select the Sensibo climate entity.
-  mandatory: true
 HVAC mode:
   description: Select the HVAC mode for which you want to get the capabilities.
-  mandatory: true
 {% endconfiguration_basic %}
 
 **Proposed action use:**
@@ -229,25 +227,18 @@ Only provide the fields which are supported by the device.
 {% configuration_basic %}
 Target:
   description: Select the Sensibo climate entity.
-  mandatory: true
 HVAC mode:
   description: Select the HVAC mode for which you want to get the capabilities.
-  mandatory: true
 Target temperature:
   description: Provide a target temperature if applicable.
-  mandatory: false
 Fan mode:
   description: Provide a fan mode if applicable.
-  mandatory: false
 Swing mode:
   description: Provide a swing mode if applicable.
-  mandatory: false
 Horizontal swing mode:
   description: Provide a horizontal swing mode if applicable.
-  mandatory: false
 Light:
   description: Provide a setting for the light if applicable.
-  mandatory: false
 {% endconfiguration_basic %}
 
 {% tip %}
@@ -267,10 +258,8 @@ Use the `sensibo.assume_state` action to tell **Sensibo** if the HVAC device is 
 {% configuration_basic %}
 Target:
   description: Select the Sensibo climate entity.
-  mandatory: true
 State:
   description: Select if the HVAC device is on or off.
-  mandatory: true
 {% endconfiguration_basic %}
 
 ### Enable Pure Boost
@@ -288,22 +277,16 @@ AC integration and Geo integration needs to be pre-configured via the app before
 {% configuration_basic %}
 Target:
   description: Select the Sensibo climate entity.
-  mandatory: true
 AC integration:
   description: Integrate with a HVAC device.
-  mandatory: true
 Geo integration:
   description: Integrate with presence.
-  mandatory: true
 Indoor air quality:
   description: Integrate with indoor air quality.
-  mandatory: true
 Outdoor air quality:
   description: Integrate with outdoor air quality.
-  mandatory: true
 Sensitivity:
   description: Set the sensitivity to `Normal` or `Sensitive`.
-  mandatory: true
 {% endconfiguration_basic %}
 
 ### Enable timer
@@ -315,7 +298,6 @@ You can enable a timer to turn the HVAC device on or off for a certain time, usi
 {% configuration_basic %}
 Target:
   description: Select the Sensibo climate entity.
-  mandatory: true
 Minutes:
   description: Number of minutes to turn the device on or off.
   mandatory: true
@@ -338,22 +320,16 @@ When using the action, the state needs to be set to precisely what Sensibo API e
 {% configuration_basic %}
 Target:
   description: Select the Sensibo climate entity.
-  mandatory: true
 Threshold high:
   description: When the trigger goes above this value.
-  mandatory: true
 State high threshold:
   description: The full state to configure above the high threshold.
-  mandatory: true
 Threshold low:
   description: When the trigger goes below this value.
-  mandatory: true
 State low threshold:
   description: The full state to configure below the low threshold.
-  mandatory: true
 Trigger type:
   description: The trigger type (`temperature`, `feelsLike`, or `humidity`).
-  mandatory: true
 {% endconfiguration_basic %}
 
 {% tip %}
