@@ -75,7 +75,7 @@ The user can use the [`homeassistant.update_entity`](homeassistant#action-homeas
 This service is reliant on an internet connection and that the **Sensibo** API is available. Here are the things you can try before raising an issue:
 
 - Check that internet is available in your Home Assistant instance.
-- Check that the **Sensibo** API is available by clicking [here](https://home.sensibo.com/api/v1/users/me). If you have previously logged in to Sensibo web, you will get a JSON back with the provided information about your account. If not logged in, the API will respond with `login_required`.
+- Check that the **Sensibo** API is available by accessing the [Sensibo API page](https://home.sensibo.com/api/v1/users/me). If you have previously logged in to Sensibo web, you will get a JSON back with the provided information about your account. If not logged in, the API will respond with `login_required`.
 - Use `curl` in a terminal on your Home Assistant instance using the same URL as previously opened in the browser. `curl https://home.sensibo.com/api/v1/users/me`
 
 ### Specific log entries
