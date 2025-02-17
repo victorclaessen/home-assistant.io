@@ -134,16 +134,6 @@ A device context and one or more entities can be added to the subentry.
 
 {% enddetails %}
 
-## Removing the integration
-
-{% include integrations/remove_device_service_steps.md %}
-
-Note: This action does not remove the [MQTT broker](#setting-up-a-broker) or its data. If you want to completely remove MQTT:
-
-1. Check your {% term "`configuration.yaml`" %} and other YAML files for MQTT-related configurations and remove them
-2. Review your automations and scripts for any MQTT dependencies
-3. Consider backing up your configuration before making these changes
-
 Your first step to get MQTT and Home Assistant working is to choose a broker.
 
 The easiest option is to install the official Mosquitto Broker add-on. You can choose to set up and configure this add-on automatically when you set up the MQTT integration. Home Assistant will automatically generate and assign a safe username and password, and no further attention is required. This also works if you have already set up this add-on yourself in advance.
@@ -1599,3 +1589,13 @@ logger:
 Event `event_mqtt_reloaded` is fired when Manually configured MQTT entities have been reloaded and entities thus might have changed.
 
 This event has no additional data.
+
+## Removing the integration
+
+{% include integrations/remove_device_service_steps.md %}
+
+Note: This action does not remove the [MQTT broker](#setting-up-a-broker) or its data. If you want to completely remove MQTT:
+
+1. Check your {% term "`configuration.yaml`" %} and other YAML files for MQTT-related configurations and remove them
+2. Review your automations and scripts for any MQTT dependencies
+3. Consider backing up your configuration before making these changes
