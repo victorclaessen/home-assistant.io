@@ -133,6 +133,7 @@ To add an MQTT device via a Subentry, follow these steps:
 A device context and one or more entities can be added to the subentry.
 
 {% enddetails %}
+
 ## Removing the integration
 
 {% include integrations/remove_device_service_steps.md %}
