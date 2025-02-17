@@ -124,8 +124,6 @@ MQTT Devices and entities can be set up through [MQTT -discovery](#mqtt-discover
 
 - [Notify](/integrations/notify.mqtt/)
 
-{% enddetails %}
-
 To add an MQTT device via a Subentry, follow these steps:
 
 1. Go to **{% my integrations title="Settings > Devices & services" %}**.
@@ -134,18 +132,12 @@ To add an MQTT device via a Subentry, follow these steps:
 
 A device context and one or more entities can be added to the subentry.
 
-
-### Removing the MQTT integration
-
-The MQTT integration and its entities can be removed by following these steps:
-
-1. Navigate to **Settings** > **Devices & Services**
-2. Find the MQTT integration and click on it
-3. Click the delete button to remove the MQTT config entry
+{% enddetails %}
+{% include integrations/remove_device_service_steps.md %}
 
 Note: This action does not remove the [MQTT broker](#setting-up-a-broker) or its data. If you want to completely remove MQTT:
 
-1. Check your `configuration.yaml` and other YAML files for MQTT-related configurations and remove them
+1. Check your {% term "`configuration.yaml`" %} and other YAML files for MQTT-related configurations and remove them
 2. Review your automations and scripts for any MQTT dependencies
 3. Consider backing up your configuration before making these changes
 
@@ -181,7 +173,7 @@ Add the MQTT integration, then provide your broker's hostname (or IP address) an
 2. Select the MQTT integration.
 3. Reconfigure the MQTT broker settings via {% my integrations title="**Settings** > **Devices & services**" %}, click {% icon "mdi:dots-vertical" %} and select **Reconfigure**.
 
-MQTT subentries can also be reconfigured. Additional entities can added, or an entity can bve removed from the sub entry. Each MQTT subentry holds one MQTT device. The MQTT device must have at least one  entity at least.
+MQTT subentries can also be reconfigured. Additional entities can be added, or an entity can bve removed from the sub entry. Each MQTT subentry holds one MQTT device. The MQTT device must have at least one entity.
 
 {% important %}
 If you experience an error message like `Failed to connect due to exception: [SSL: CERTIFICATE_VERIFY_FAILED] certificate verify failed`, then turn on `Advanced options` and set [Broker certificate validation](/integrations/mqtt/#broker-certificate-validation) to `Auto`.
