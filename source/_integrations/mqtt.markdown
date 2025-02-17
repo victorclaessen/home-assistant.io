@@ -133,6 +133,8 @@ To add an MQTT device via a Subentry, follow these steps:
 A device context and one or more entities can be added to the subentry.
 
 {% enddetails %}
+## Removing the integration
+
 {% include integrations/remove_device_service_steps.md %}
 
 Note: This action does not remove the [MQTT broker](#setting-up-a-broker) or its data. If you want to completely remove MQTT:
