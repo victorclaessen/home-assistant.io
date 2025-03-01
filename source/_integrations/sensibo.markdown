@@ -63,28 +63,6 @@ API key:
   description: The previously created API key.
 {% endconfiguration_basic %}
 
-## Data fetching and limitations
-
-Data is {% term polling polled %} from the **Sensibo** API once every minute for all devices.
-
-If {% term polling %} cannot happen because of no connectivity or a malfunctioning API, it will retry a few times before failing.
-The user can use the [`homeassistant.update_entity`](homeassistant#action-homeassistantupdate_entity) action to manually try again later, in the case the user has solved the connectivity issue.
-
-## Troubleshooting
-
-This service is reliant on an internet connection and that the **Sensibo** API is available. Here are the things you can try before raising an issue:
-
-- Check that internet is available in your Home Assistant instance.
-- Check that the **Sensibo** API is available by accessing the [Sensibo API page](https://home.sensibo.com/api/v1/users/me). If you have previously logged in to Sensibo web, you will get a JSON back with the provided information about your account. If not logged in, the API will respond with `login_required`.
-- Use `curl` in a terminal on your Home Assistant instance using the same URL as previously opened in the browser. `curl https://home.sensibo.com/api/v1/users/me`
-
-### Specific log entries
-
-**Log entry:** `Device [name of device] not correctly registered with remote on Sensibo cloud.`
-
-When setting up a device the first time, a `remote` needs to be defined for the device in the **Sensibo** app, either automatically or manually.
-The device will appear in Home Assistant, but won't be usable as no HVAC modes can be selected.
-
 ## Supported functionality
 
 {% note %}
@@ -432,6 +410,28 @@ automation:
 ```
 
 {% endraw %}
+
+## Data fetching and limitations
+
+Data is {% term polling polled %} from the **Sensibo** API once every minute for all devices.
+
+If {% term polling %} cannot happen because of no connectivity or a malfunctioning API, it will retry a few times before failing.
+The user can use the [`homeassistant.update_entity`](homeassistant#action-homeassistantupdate_entity) action to manually try again later, in the case the user has solved the connectivity issue.
+
+## Troubleshooting
+
+This service is reliant on an internet connection and that the **Sensibo** API is available. Here are the things you can try before raising an issue:
+
+- Check that internet is available in your Home Assistant instance.
+- Check that the **Sensibo** API is available by accessing the [Sensibo API page](https://home.sensibo.com/api/v1/users/me). If you have previously logged in to Sensibo web, you will get a JSON back with the provided information about your account. If not logged in, the API will respond with `login_required`.
+- Use `curl` in a terminal on your Home Assistant instance using the same URL as previously opened in the browser. `curl https://home.sensibo.com/api/v1/users/me`
+
+### Specific log entries
+
+**Log entry:** `Device [name of device] not correctly registered with remote on Sensibo cloud.`
+
+When setting up a device the first time, a `remote` needs to be defined for the device in the **Sensibo** app, either automatically or manually.
+The device will appear in Home Assistant, but won't be usable as no HVAC modes can be selected.
 
 ## Remove the integration
 
