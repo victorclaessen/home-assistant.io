@@ -67,7 +67,7 @@ API key:
 
 Data is {% term polling polled %} from the **Sensibo** API once every minute for all devices.
 
-If {% term polling %}  cannot happen because of no connectivity or a malfunctioning API, it will retry a few times before failing.
+If {% term polling %} cannot happen because of no connectivity or a malfunctioning API, it will retry a few times before failing.
 The user can use the [`homeassistant.update_entity`](homeassistant#action-homeassistantupdate_entity) action to manually try again later, in the case the user has solved the connectivity issue.
 
 ## Troubleshooting
@@ -185,7 +185,7 @@ Depending on device support, some entities might not be available as the device 
 - **Main sensor**: Is the connected motion sensor the main sensor for the connected Air device.
 - **Room occupied**: Is there presence in the room of the connected Air device.
 
-## Custom actions
+## Actions
 
 ### Get device mode capabilities
 
@@ -392,7 +392,6 @@ switch:
 
 ```yaml
 automation:
-  id: "123"
   alias: "Example timer"
   triggers:
     - trigger: zone
@@ -405,7 +404,6 @@ automation:
         minutes: 30
       target:
         entity_id: climate.hvac_device
-  mode: single
 ```
 
 {% endraw %}
@@ -416,7 +414,6 @@ automation:
 
 ```yaml
 automation:
-  id: "123"
   alias: "Example full state"
   triggers:
     - trigger: time
@@ -432,7 +429,6 @@ automation:
         light: "off"
       target:
         entity_id: climate.hvac_device
-  mode: single
 ```
 
 {% endraw %}
