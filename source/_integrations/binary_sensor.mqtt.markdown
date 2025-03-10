@@ -163,6 +163,11 @@ json_attributes_topic:
   description: The MQTT topic subscribed to receive a JSON dictionary payload and then set as sensor attributes. Usage example can be found in [MQTT sensor](/integrations/sensor.mqtt/#json-attributes-topic-configuration) documentation.
   required: false
   type: string
+last_report:
+  description: "When set, this will not suppress state changes when an update is received. This will ensure the `last_report` attribute to be updated."
+  required: false
+  type: boolean
+  default: false
 name:
   description: The name of the binary sensor. Can be set to `null` if only the device name is relevant.
   required: false

@@ -764,6 +764,7 @@ support_url:
     'json_attr_tpl':       'json_attributes_template',
     'l_ver_t':             'latest_version_topic',
     'l_ver_tpl':           'latest_version_template',
+    'lrprt':               'last_report',
     'lrst_t':              'last_reset_topic',
     'lrst_val_tpl':        'last_reset_value_template',
     'max':                 'max',
@@ -1423,6 +1424,8 @@ For sensors, users can set `force_update` to enforce state updates, or they can 
 While having the `last_reported` attribute is nice, there are many power sensors (mostly from Zigbee2MQTT) on the market that flood the state machine with data. This could effectively force users to buy better hardware or switch to a different solution.
 
 MQTT state updates are often repeated frequently, even when there are no actual changes. It is up to the MQTT subscriber to determine whether a status update was received. If the latest update was missed, it might take some time before the next one arrives. If a retained payload exists at the broker, that value will be replayed first, but it will be an update of a previous last state. As a result, MQTT devices often continuously generate numerous state updates.
+
+For MQTT [sensor](/integrations/sensor.mqtt/) and [binary sensor](/integrations/binary_sensor.mqtt/) entities the `last_report` option can be set on the entities config to enable state writes even when there is no state or attribute change.
 
 ## Using Templates
 
