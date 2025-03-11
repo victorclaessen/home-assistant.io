@@ -1425,7 +1425,7 @@ While having the `last_reported` attribute is nice, there are many power sensors
 
 MQTT state updates are often repeated frequently, even when there are no actual changes. It is up to the MQTT subscriber to determine whether a status update was received. If the latest update was missed, it might take some time before the next one arrives. If a retained payload exists at the broker, that value will be replayed first, but it will be an update of a previous last state. As a result, MQTT devices often continuously generate numerous state updates.
 
-For MQTT [sensor](/integrations/sensor.mqtt/) and [binary sensor](/integrations/binary_sensor.mqtt/) entities the `last_report` option can be set on the entities config to enable state writes even when there is no state or attribute change.
+For MQTT [sensor](/integrations/sensor.mqtt/) and [binary sensor](/integrations/binary_sensor.mqtt/) entities the `enable_state_write_suppression` option can be set to `false` on the entities config to enable state writes even when there is no state or attribute change.
 
 ## Using Templates
 

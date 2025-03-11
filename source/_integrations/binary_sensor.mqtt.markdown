@@ -124,6 +124,11 @@ device_class:
   description: Sets the [class of the device](/integrations/binary_sensor/#device-class), changing the device state and icon that is displayed on the frontend. The `device_class` can be `null`.
   required: false
   type: string
+enable_state_write_suppression:
+  description: "Enabled by default. When set to `false`, this will not suppress state changes when an update is received. This will ensure the `last_report` attribute to be updated."
+  required: false
+  type: boolean
+  default: true
 enabled_by_default:
   description: Flag which defines if the entity should be enabled when first added.
   required: false
@@ -163,11 +168,6 @@ json_attributes_topic:
   description: The MQTT topic subscribed to receive a JSON dictionary payload and then set as sensor attributes. Usage example can be found in [MQTT sensor](/integrations/sensor.mqtt/#json-attributes-topic-configuration) documentation.
   required: false
   type: string
-last_report:
-  description: "When set, this will not suppress state changes when an update is received. This will ensure the `last_report` attribute to be updated."
-  required: false
-  type: boolean
-  default: false
 name:
   description: The name of the binary sensor. Can be set to `null` if only the device name is relevant.
   required: false
